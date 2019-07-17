@@ -2,14 +2,6 @@
 
 This project consists of code snippets to learn Rust.
 
-Snippets are tagged and to list all the tags use the following command
+These contain all the code snippets and training programs in the Rust Programming language book.
 
-```
-git tag -n
-```
-
-And to checkout a specific snippet, use the following
-
-```
-git checkout <tag-name>
-```
+One can find the book at this [link](https://doc.rust-lang.org/book/ch00-00-introduction.html)
