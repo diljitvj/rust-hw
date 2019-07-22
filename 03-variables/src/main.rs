@@ -1,24 +1,37 @@
 #![allow(unused_variables)]
 
+
 fn main() {
+
+    let boolean : bool = false;
+    let string_val : &str = "123";
+
+    println!("boolean = {} size = {} byte", boolean, std::mem::size_of_val(&boolean));
+    println!("string_val = {} size = {} byte", string_val, std::mem::size_of_val(&string_val));
+
     // mutable variable. Only the value can be mutated and not the type
-    let mut x = 5;
-    println!("The value of x is {}", x);
-
+    // integer types i8, u8, i16, u16, i32, u32, i64, u64, isize, usize
+    let mut x: i32 = 5;
+    println!("The value of x is {} , size = {} bytes ({} bits)", x, std::mem::size_of_val(&x),  std::mem::size_of_val(&x) * 8);
     x = 6;
-
     println!("x is now {}", x);
+
+    x = i32::pow(x, 3);
+    println!("x cubed = {}", x);
 
     let a = b'A';
     println!("a is {}", a);
 
+    let sizevar: isize = 1;
+    println!("sizevar = {} , size of sizevar = {} bytes, {}-bit OS", sizevar, std::mem::size_of_val(&sizevar),std::mem::size_of_val(&sizevar) * 8 );
+
     // Constant declaration. Constants are always immutable
-    // Integer values can have a visual sperator _ for easy readability. The seperator doesnot affect the value
+    // Integer values can have a visual seperator _ for easy readability. The seperator does not affect the value
     const MAX_POINTS: u32 = 100_000;
 
     println!("max points is {}", MAX_POINTS);
 
-    // Shadowing is used to change the value of a variable as well as its type.
+    // Shadowing is used to change the value of a variable as well as its type. The variable need not mutable to utilize shadowing.
 
     let y = 1;
 
@@ -48,7 +61,7 @@ fn main() {
     // Elements in an Array should be of the same type.
     // The length is fixed in an array
 
-    let months = [
+    let months: [&str; 12] = [
         "January",
         "February",
         "March",
@@ -67,7 +80,7 @@ fn main() {
 
     // Accessing array elements
 
-    let first = months[0];
+    let first: &str = months[0];
 
     // Integer addition
     println!("1 + 2 = {}", 1u32 + 2);
