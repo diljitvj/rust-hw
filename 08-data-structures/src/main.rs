@@ -43,7 +43,77 @@ fn enums(){
 
 }
 
+//
+union IntOrFloat {
+    i: i32,
+    f: f32
+}
+
+fn unions(){
+    let iof = IntOrFloat { i : 123 };
+
+    unsafe {
+        match iof {
+            IntOrFloat{ i} => println!("Integer {}", iof.i),
+            IntOrFloat{ f} => println!("Float {}", iof.f),
+        }
+    }
+}
+
+fn option(){
+    let x:f32 = 1.0;
+    let y:f32 = 1.0;
+
+    let result: Option<f32> = if y != 0.0 { Some(x/y) } else { None };
+
+    match result {
+        Some(z) => println!("{}/{} = {}", x, y, z),
+        None => println!("Cannot divide {}/{}", x, y)
+    }
+
+    if let Some(z) = result { println!("Result is {}", z); };
+    if let None = result { println!("Cannot divide");};
+
+}
+
+fn arrays(){
+    let mut a : [i32;5]; // Declares a mutable array of size 5, which can store i32 values.
+    a = [1,2,3,4,5];
+
+    println!("The array a has {} and first element is {} ", a.len(), a[0]);
+    println!("{:?}", a); // debug output for the array
+
+    if a == [1,2,3,4,5] {
+        println!("Array matches [1,2,3,4,5]");
+    }
+
+    let b = [1u16;10]; // fill the array with 10 1s and specify the size as u16
+
+    for i in 0..b.len(){
+        println!("{}", b[i]);
+    }
+
+    println!("b took {} bytes", std::mem::size_of_val(&b));
+
+    let mtx:[[i32;3];3] = [[1,2,2],[3,2,3], [0,0,3]];
+
+    println!("{:?}", mtx);
+
+    for i in 0..mtx.len(){
+        for j in 0..mtx[i].len(){
+            if i == j {
+                println!("{}", mtx[i][j]);
+            }
+        }
+    }
+
+
+}
+
 fn main(){
     structures();
     enums();
+    unions();
+    option();
+    arrays();
 }
