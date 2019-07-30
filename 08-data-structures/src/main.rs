@@ -106,8 +106,51 @@ fn arrays(){
             }
         }
     }
+}
 
+fn vectors(){
+    let mut a = Vec::new();
 
+    a.push(1);
+    a.push(2);
+    a.push(3);
+
+    println!("{:?}", a);
+
+    let index:usize = 0;
+
+    println!("vector at {} = {}", index, a[index]); // get the value of a vector at an index
+
+    println!("get a value of vector at {} = {:?}", 3, a.get(2));
+
+    let last_el: i32 = match a.pop() {
+        Some(i) => i,
+        None => {
+            println!("No element found");
+            0
+        }
+    };
+
+    println!("last element = {}", last_el);
+}
+
+fn slices(slice: &[i32]){
+    println!("First element {}, number of elements in the slice = {}", slice[0], slice.len());
+}
+
+fn tuples(){
+    let tup1 = (1,2,3);
+    let tup2 = (1,1.0,"a",[1,2,3]);
+    let (a,b, c, d) = tup2;
+
+    println!("a = {}, b = {}", a,b);
+
+    let tup_combined = (tup1, tup2);
+    let ((a,b,c),(d, e ,f,g)) = tup_combined; // destructuring tuples
+
+    let single_elm_tuple = (1,); // Declaration statement for tuple with single element
+
+    println!("{:?}", single_elm_tuple);
 }
 
 fn main(){
@@ -116,4 +159,28 @@ fn main(){
     unions();
     option();
     arrays();
+    vectors();
+
+    let arr:[i32;5] = [1,2,3,4,5];
+    let slice = &arr[2..5]; // a slice of an array with elements at 2,3, & 4 index
+    slices(slice);
+
+    // Strings
+
+    let s1 = "Hello world"; // &str is a string slice.
+    let s2 : &'static str = "";
+
+    for c in s1.chars() {
+        println!("{}", c);
+    }
+
+    if let Some(c) = s1.chars().nth(0) {
+        println!("{}", c);
+    };
+
+    // Heap allocated String
+
+    let mut s3 = String::new();
+
+    tuples();
 }
